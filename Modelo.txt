@@ -1,0 +1,47 @@
+
+Indices:
+i = 1...n magias
+
+
+Dados:
+Casti- tempo de lançamento de uma magia (s)
+Dmgi - representa o dano causado por uma magia (DMG)
+CDi - 'Cooldown' ou tempo de relançamento de uma magia (s)
+MPi - Custo de Mana Points para lançamento da magia (MP)
+MRR - Taxa de recuperação de Mana Points (MP/s)
+HPi - Cura por lançamento da magia i (HP)
+TF - Taxa de ferimento, perda de HP (HP/s)
+Fmi - Frequencia minima de lançamento de magia (1/s)
+FMi - Frequencia maxima de lançamento de magia (1/s)
+
+
+Se nao houver restrição Fmi = 0 e FMi = 1/(CDi+Casti) e Hpi = 0
+
+TT- tempo total 
+
+Variáveis:
+Ni - Numero de vezes que a magia i foi lançada
+
+Problema:
+
+Dano por Segundo (DPS)
+
+Maximizar  Sum(i)  (Dmgi * Ni) / TT
+
+Restrições:
+
+	Sum(i) Ni*Casti <= TT			(Numero de lançamentos * tempo de lançamento <= tempo total disponivel)	  
+	
+
+	Ni/TT >= Fmi		   		
+
+	Ni/TT <= FMi				
+
+	Ni <= Nj			    (Magias relacionadas ou encadeadas)
+
+	Sum(i) Ni * (MPi / TT) <= MRR       (Taxa de consumo de MP deve ser  menor que a taxa de regeneração de MP)
+
+	sum(i) (HPi/TT) * Ni >= TF	   (Taxa de recuperação de HP devido lançamento de skills deve ser maior que taxa de dano sofrido)
+	
+ 	
+
