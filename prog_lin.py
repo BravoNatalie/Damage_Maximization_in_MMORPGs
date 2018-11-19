@@ -51,8 +51,14 @@ try:
     # Add constraints:
     cc = 1  #Constraints counter 
     for x in range(0,n_spells):
-        m.addConstr(var[x]*spells[x][1] + (var[x]-1)*spells[x][3] <= t_var[x],"c" + str(cc))     #Define Ni*Casti + (Ni-1) * CDi <= ti
+        m.addConstr((var[x]-1)*spells[x][3] <= t_var[x],"c" + str(cc))     #Define (Ni-1) * CDi <= ti
         cc += 1
+
+    expr = LinExpr()
+    for x in range(0,n_spells):
+        expr += var[x]*spells[x][1]                            #Define  sum(Ni*Casti) <= TT 
+    m.addConstr(expr <= TT , "c" + str(cc))
+    cc += 1
 
     expr = LinExpr()
     for x in range(0,n_spells):
